@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import Weather from "./Weather";
+import useGeolocation from "../hooks/useGeolocation";
 
 const Header = () => {
   const [weatherData, setWeatherData] = useState({});
+  const location = useGeolocation();
+  console.log(location);
 
   const checkWeather = async () => {
     try {
@@ -26,7 +29,7 @@ const Header = () => {
   console.log(weatherData);
 
   return (
-    <header className="bg-red-200 w-[900px] p-8 flex justify-between ">
+    <header className="bg-red-200 w-[900px] mx-auto p-8 flex justify-between">
       <div className="flex flex-col gap-2">
         <h1 className="text-4xl">Today checklist⛅</h1>
         <input

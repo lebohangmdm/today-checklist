@@ -5,28 +5,28 @@ import useGeolocation from "../hooks/useGeolocation";
 const Header = () => {
   const [weatherData, setWeatherData] = useState({});
   const location = useGeolocation();
-  console.log(location);
-
-  const checkWeather = async () => {
-    try {
-      const res = await fetch(
-        // eslint-disable-next-line no-undef
-        `https://api.openweathermap.org/data/2.5/weather?q=johannesburg&units=metric&appid=${
-          import.meta.env.VITE_API_KEY
-        }`
-      );
-      const data = await res.json();
-      setWeatherData(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const {
+    coordinates: { lat, lng },
+  } = location;
+  console.log(lat, lng);
 
   useEffect(() => {
-    checkWeather();
-  }, []);
+    const checkWeather = async () => {
+      try {
+        const res = await fetch(
+          `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=${
+            import.meta.env.VITE_API_KEY
+          }`
+        );
 
-  console.log(weatherData);
+        const data = await res.json();
+        setWeatherData(data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    checkWeather();
+  }, [lat, lng]);
 
   return (
     <header className="bg-red-200 w-[900px] mx-auto p-8 flex justify-between">

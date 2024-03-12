@@ -1,4 +1,8 @@
-const Search = ({ query, setQuery, setWeatherData }) => {
+import { useState } from "react";
+
+const Search = ({ setWeatherData }) => {
+  const [query, setQuery] = useState("");
+
   const submitHandler = async (e) => {
     e.preventDefault();
     if (query.length < 3) return;

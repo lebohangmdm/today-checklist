@@ -5,7 +5,6 @@ import Search from "./Search";
 
 const Header = () => {
   const [weatherData, setWeatherData] = useState({});
-  const [query, setQuery] = useState("");
   const location = useGeolocation();
   const {
     coordinates: { lat, lng },
@@ -34,11 +33,7 @@ const Header = () => {
     <header className="bg-red-200 w-[900px] mx-auto p-8 flex justify-between">
       <div className="flex flex-col gap-3">
         <h1 className="text-5xl">Today checklist⛅</h1>
-        <Search
-          query={query}
-          setQuery={setQuery}
-          setWeatherData={setWeatherData}
-        />
+        <Search setWeatherData={setWeatherData} />
       </div>
 
       {weatherData.weather && <Weather weatherData={weatherData} />}

@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <div className="h-screen bg-slate-100 flex flex-col items-center p-8 ">
-        <Header />
+        {/* <Header /> */}
         <Items />
         <Footer />
       </div>

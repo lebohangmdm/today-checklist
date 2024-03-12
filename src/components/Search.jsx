@@ -14,8 +14,8 @@ const Search = ({ setWeatherData }) => {
         }`
       );
 
-      if (!res.ok)
-        throw new Error("We cannot find the weather data for this location");
+      // if (!res.ok)
+      //   throw new Error("We cannot find the weather data for this location");
 
       const data = await res.json();
       setWeatherData(data);

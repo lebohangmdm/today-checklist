@@ -1,15 +1,16 @@
 import { useState } from "react";
 
-const Search = ({ setWeatherData }) => {
+const Search = ({ setWeatherData, setIsLoading }) => {
   const [query, setQuery] = useState("");
 
   const submitHandler = async (e) => {
     e.preventDefault();
     if (query.length < 3) return;
-
+    console.log(query);
     try {
+      setIsLoading(true);
       const res = await fetch(
-        `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&appid=${
+        `https://api.openweathermap.org/data/2.5/weather?q=${query}&units=metric&appid=${
           import.meta.env.VITE_API_KEY
         }`
       );
@@ -18,11 +19,13 @@ const Search = ({ setWeatherData }) => {
       //   throw new Error("We cannot find the weather data for this location");
 
       const data = await res.json();
+      console.log(data);
       setWeatherData(data);
     } catch (error) {
       console.log(error);
     } finally {
       setQuery("");
+      setIsLoading(false);
     }
   };
 
